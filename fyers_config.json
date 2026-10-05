@@ -1,0 +1,9 @@
+{
+  "client_id": "O4IU017L3R-100",
+  "secret_key": "12MAV54KZB",
+  "redirect_uri": "http://127.0.0.1:8080/callback",
+  "fy_id": "XM05617",
+  "pin": "3159",
+  "totp_key": "",
+  "fallback_client_id": "J1AXE2DYZH-100"
+}

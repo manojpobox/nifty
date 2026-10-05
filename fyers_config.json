@@ -3,7 +3,7 @@
   "secret_key": "12MAV54KZB",
   "redirect_uri": "http://127.0.0.1:8080/callback",
   "fy_id": "XM05617",
-  "pin": "3159",
+  "pin": "1617",
   "totp_key": "",
   "fallback_client_id": "J1AXE2DYZH-100"
 }

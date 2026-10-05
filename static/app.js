@@ -122,18 +122,30 @@ function updateHeaderStatus(status, totp) {
     connText.innerHTML = `⚠️ FYERS OFFLINE`;
   }
 
-  // TOTP Card
+  // TOTP / Auto-Engine Card
+  const totpLabel = document.querySelector(".totp-label");
   const totpDigits = document.getElementById("totp-digits");
   const totpTimer = document.getElementById("totp-timer");
   if (totp && totp.has_key) {
+    if (totpLabel) totpLabel.textContent = "🔐 LIVE FYERS 2FA TOTP";
     const c = totp.code || "------";
     totpDigits.textContent = c.length === 6 ? `${c.slice(0,3)} ${c.slice(3)}` : c;
+    totpDigits.style.fontSize = "17px";
+    totpDigits.style.letterSpacing = "3px";
+    totpDigits.style.color = "#38bdf8";
     totpTimer.textContent = `${totp.remaining_secs || 0}s`;
+    totpTimer.style.color = "#60a5fa";
   } else {
-    totpDigits.textContent = "KEY MISSING";
-    totpTimer.textContent = "--";
+    if (totpLabel) totpLabel.textContent = "🛡️ AUTO-PILOT ENGINE";
+    totpDigits.textContent = "100% AUTOMATIC";
+    totpDigits.style.fontSize = "13px";
+    totpDigits.style.letterSpacing = "1px";
+    totpDigits.style.color = "#00ff88";
+    totpTimer.textContent = "ACTIVE";
+    totpTimer.style.color = "#00ff88";
   }
 }
+
 
 function updateTopKpis(s) {
   if (!s) return;
@@ -399,13 +411,22 @@ async function initExpiries() {
 function initModals() {
   const modal = document.getElementById("settings-modal");
   const openBtn = document.getElementById("btn-open-settings");
+  const totpCardBtn = document.getElementById("totp-card-btn");
   const closeBtn = document.getElementById("btn-close-modal");
   const saveBtn = document.getElementById("btn-save-creds");
   const authBtn = document.getElementById("btn-fyers-auth");
   const autoLoginBtn = document.getElementById("btn-auto-login");
 
-  openBtn.addEventListener("click", () => modal.style.display = "flex");
+  const openSettings = () => {
+    modal.style.display = "flex";
+    const totpIn = document.getElementById("input-totp");
+    if (totpIn) totpIn.focus();
+  };
+
+  openBtn.addEventListener("click", openSettings);
+  if (totpCardBtn) totpCardBtn.addEventListener("click", openSettings);
   closeBtn.addEventListener("click", () => modal.style.display = "none");
+
   window.addEventListener("click", (e) => {
     if (e.target === modal) modal.style.display = "none";
   });

@@ -1,9 +1,11 @@
 __pycache__/
 *.pyc
 *.tmp
+*.log
 ref_*.py
 ref_token.txt
 fyers_logs/
 inspect_nifty.py
 test_niftybox.py
 .system_generated/
+
